@@ -9,8 +9,11 @@ public class Person {
     private int id;
     private long chatId;
     private int state;
+    private int car;
+    private String role;
 
-    public Person(String password, String username, String email, Double balance, boolean confirmed,int id,long chatId,int state) {
+    public Person(String password, String username, String email, Double balance, boolean confirmed,int id,long chatId,int state,int car
+    ,String role) {
         this.password = password;
         this.username = username;
         this.email = email;
@@ -19,9 +22,27 @@ public class Person {
         this.id = id;
         this.chatId = chatId;
         this.state = state;
+        this.car = car;
+        this.role = role;
     }
 
     public Person(){};
+
+    public int getCar() {
+        return car;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void setCar(int car) {
+        this.car = car;
+    }
 
     public String getPassword() {
         return password;

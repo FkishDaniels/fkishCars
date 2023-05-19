@@ -24,15 +24,20 @@ public class PersonDAO {
         return jdbcTemplate.query("SELECT * FROM PERSON WHERE ChatId = ?", new Object[]{ChatId},
                 new BeanPropertyRowMapper<>(Person.class)).stream().findAny().orElse(null);
     }
+    public void addCar(int carId,int personId){
+        jdbcTemplate.update("UPDATE person set car = ? where id =?",carId,personId);
+    }
 
     public void save(Person person){
-        jdbcTemplate.update("INSERT INTO person(username,password,email,balance,confirmed,chatId,state) VALUES(?,?,?,?,?,?,1)", person.getUsername(), person.getPassword(), person.getEmail(), person.getBalance(),person.isConfirmed(),person.getChatId());
+        jdbcTemplate.update("INSERT INTO person(username,password,email,balance,confirmed,chatId,state,role,car) VALUES(?,?,?,?,?,?,1,?,?)",person.getUsername(), person.getPassword(), person.getEmail(), person.getBalance(),person.isConfirmed(),person.getChatId(),person.getRole(),person.getCar());
     }
 
     public void update(int id, Person updatedPerson) {
         jdbcTemplate.update("UPDATE person SET confirmed=?,balance = ?,state=? WHERE id =?", updatedPerson.isConfirmed(), updatedPerson.getBalance(),updatedPerson.getState(),id);
     }
-
+    public void carRented(int id){
+        jdbcTemplate.update("UPDATE person SET car = 0 where id =?",id);
+    }
     public void delete(int id) {
         jdbcTemplate.update("DELETE FROM person WHERE id =?", id);
     }
